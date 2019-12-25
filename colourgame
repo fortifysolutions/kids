@@ -1,0 +1,47 @@
+import pygame
+import time
+import os
+import random
+
+global speed
+
+speed = int(input('Enter the dispaly speed: '))
+print(os.path.realpath(__file__))
+pygame.init()
+
+main_screen = pygame.display.set_mode((800, 600))
+
+pygame.display.set_caption("My-Game")
+# time.sleep(5)
+# pygame.display.set_caption("")
+
+image_1 = '/root/iconfinder_HSL_131861.png'
+#icon = pygame.image.load(root)
+# pygame.display.set_icon(icon) not working
+screen_image = pygame.image.load(image_1)
+screen_image_x = 400
+screen_image_y = 480
+
+
+def on_screen_image(x, y):
+    main_screen.blit(screen_image, (x, y))
+    
+
+count = 0
+game_is_on = True
+while game_is_on:
+    #  for i in range(10):
+    r = random.randint(0, 255)
+    b = random.randint(0, 255)
+    g = random.randint(0, 255)
+    main_screen.fill((r, b, g))
+    count += 1
+    a = str(count)
+    pygame.display.set_caption(a)
+    time.sleep(speed)
+    on_screen_image(screen_image_x,screen_image_y)
+
+    for game in pygame.event.get():
+        if game.type == pygame.QUIT:
+            game_is_on = False
+    pygame.display.update()
